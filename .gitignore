@@ -1,6 +1,6 @@
 __pycache__
 .vscode
 bak
-*.jpg
-*.png
-*.jpeg
+id-validate/*.jpg
+id-validate/*.png
+id-validate/*.jpeg
