@@ -18,8 +18,12 @@ Follow these steps: https://linuxize.com/post/how-to-install-python-3-7-on-ubunt
 Follow these steps: https://www.odoo.com/es_ES/forum/ayuda-1/how-to-install-pip-in-python-3-on-ubuntu-18-04-167715
 
 ## Install numpy
+```
 sudo apt-get install python-numpy
-en caso de tener problemas con la versión, realizar una purga:
+```
+
+In case of problems with the version, perform a purge:
+
 ```
 sudo -H python3.7 -m pip uninstall numpy
 sudo apt purge python3-numpy -y
