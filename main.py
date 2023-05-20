@@ -42,10 +42,10 @@ for fileName in filePaths:
     # If verbose is activated shows some process information
     if (verbose):
         print("Execution time   : {:.3f} s".format(execution_time))
-        cv2.waitKey(0)
+        # cv2.waitKey(0)
         cv2.destroyAllWindows()
     print()
     # Adds the current execution time to the general execution time
     total_time += execution_time
 
-print("Total time   : {} s".format(total_time/len(filePaths)))
+print("Total time: {} s".format(total_time))

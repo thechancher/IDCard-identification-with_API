@@ -1,6 +1,5 @@
 from ImageProcessor import ImageProcessor
 from Recognizer import Recognizer
-from CRElectoralRoll import CRElectoralRoll
 import numpy as np
 import cv2
 import math
@@ -9,6 +8,7 @@ import matplotlib.pyplot as plt
 import random as rng
 from PIL import Image
 import pytesseract
+from API import API
 
 class CRIdentityCardRecognizer(Recognizer):
 
@@ -28,7 +28,7 @@ class CRIdentityCardRecognizer(Recognizer):
     sqKernel7: np.ndarray
 
     def __init__(self):
-        super().__init__(database=CRElectoralRoll(), lang="spa")
+        super().__init__(lang="spa")
         self.idNumberX1 = 120
         self.idNumberX2 = 335
         self.idNumberY1 = 75
@@ -47,6 +47,9 @@ class CRIdentityCardRecognizer(Recognizer):
                                                    ksize=(3, 3))
         self.sqKernel7 = cv2.getStructuringElement(shape=cv2.MORPH_RECT,
                                                    ksize=(7, 7))
+        
+        # setting the API
+        self.api = API()
 
     def validateDocumentType(self, img: np.array):
         img = self.imgProcessor.im2grayscale(img)
@@ -135,8 +138,17 @@ class CRIdentityCardRecognizer(Recognizer):
                                                      contours=contours)
         # Determines if the information is authentic
         if(id != None):
-            isAuthentic = self.database.isAuthentic(numId=id.replace(" ", ""),
-                                                    nameId=fullName)
+            # this data is taken from the API
+            data = self.api.getData(id)
+            if "data" in data:
+                print("============== Data from API ==============")
+                data = data["data"]
+                print("id               : {}".format(id))
+                print("Name             : {}".format(data["NAME"]))
+                print("First last name  : {}".format(data["LAST1"]))
+                print("Second last name : {}".format(data["LAST2"]))
+                print("===========================================")
+            isAuthentic = True
             # If verbose is activated shows some process information
             if (verbose):
                 # Shows the prediction information

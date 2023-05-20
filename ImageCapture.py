@@ -28,9 +28,9 @@ class ImageCapture:
             
             cv2.imshow('ID-Card recognition', frame)
             c = cv2.waitKey(1)
-            if c == 115:
+            if c == ord('q'):
                 cv2.imwrite('id-validate/image.jpg',frame)
-                #cv2.imwrite('Pruebas/image.jpg',frame)
+                # cv2.imwrite('test/image.jpg',frame)
                 print('Image successfully captured')
                 break
 
